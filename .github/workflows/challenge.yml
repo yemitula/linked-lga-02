@@ -1,0 +1,27 @@
+name: challenge
+
+on: push
+
+jobs:
+  date-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: date
+  date-on-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: Get-Date
+  date-on-mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: date
+  runs-after-others:
+    needs: [date-on-ubuntu, date-on-windows, date-on-mac]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: "echo 'Finished printing dates'"
+
